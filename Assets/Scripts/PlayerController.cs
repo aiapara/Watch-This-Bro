@@ -131,8 +131,8 @@ public class PlayerController : MonoBehaviour
 			case _state.JUMPING:
 			    if (Input.GetKeyDown(KeyCode.Space))
 				{
-					Vector3 dbjump = new Vector3(rb.velocity.x, doubleJumpForce, rb.velocity.z);
-					rb.velocity = dbjump;
+					Vector3 dbjump = new Vector3(rb.linearVelocity.x, doubleJumpForce, rb.linearVelocity.z);
+					rb.linearVelocity = dbjump;
 					audioSource.PlayOneShot(jumpAudio, 0.4f);
 					state = _state.DOUBLE_JUMP;
 				}
@@ -231,11 +231,11 @@ public class PlayerController : MonoBehaviour
 
 		// Max horizontal speed a player can reach
 		float maxSpeed = 5f;
-		Vector3 horizontalVelocity = new Vector3(rb.velocity.x, 0, rb.velocity.z);
+		Vector3 horizontalVelocity = new Vector3(rb.linearVelocity.x, 0, rb.linearVelocity.z);
 		if (horizontalVelocity.magnitude > maxSpeed)
 		{
 			horizontalVelocity = horizontalVelocity.normalized * maxSpeed;
-			rb.velocity = new Vector3(horizontalVelocity.x, rb.velocity.y, horizontalVelocity.z);
+			rb.linearVelocity = new Vector3(horizontalVelocity.x, rb.linearVelocity.y, horizontalVelocity.z);
 		}
 	}
 
